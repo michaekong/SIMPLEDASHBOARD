@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Avancé avec Cartes et Graphiques</title>
+    
+    <!-- Inclusion de la feuille de style pour Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
+    <!-- Style pour Leaflet Draw -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+    
+    <style>
+        /* Style global pour le corps */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* Style de l'en-tête */
+        header {
+            background-color: #001f3d;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Conteneur principal pour le dashboard */
+        #dashboard-container {
+            width: 100%;
+            height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-gap: 20px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Style des cartes */
+        .map-container {
+            width: 100%;
+            height: 400px; /* Hauteur des cartes */
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Style des graphiques */
+        .chart-container {
+            width: 100%;
+            height: 400px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Style des titres des cartes et des graphiques */
+        .chart-title, .map-title {
+            font-size: 18px;
+            text-align: center;
+            padding: 10px;
+            background-color: #003366;
+            color: white;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- En-tête avec titre -->
+    <header>
+        <h1>Dashboard Avancé</h1>
+    </header>
+
+    <!-- Conteneur principal du dashboard -->
+    <div id="dashboard-container">
+        
+    </div>
+
+    <!-- Chargement des bibliothèques nécessaires -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Pour les graphiques -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script> <!-- Leaflet pour les cartes -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script> <!-- Extension Leaflet Draw -->
+    
+    <!-- Inclusion du fichier JS contenant la classe AdvancedDashboard -->
+    <script src="class.js"></script>
+
+    <script>
+        // Initialisation de l'instance du Dashboard Avancé
+        const dashboard = new AdvancedDashboard('dashboard-container');
+
+        // Exemple de données pour les utilisateurs
+        const userLocations = [
+            { latitude: 40.7128, longitude: -74.0060, name: "John Doe", age: 28, occupation: "Developer", id: "1" },
+            { latitude: 34.0522, longitude: -118.2437, name: "Jane Smith", age: 34, occupation: "Designer", id: "2" },
+            { latitude: 51.5074, longitude: -0.1278, name: "Albert", age: 45, occupation: "Manager", id: "3" },
+            { latitude: 48.8566, longitude: 2.3522, name: "Pierre Dupont", age: 29, occupation: "Architect", id: "4" }
+        ];
+
+        // Liste des propriétés à afficher dans les infobulles des marqueurs
+        const propertyKeys = ["name", "age", "occupation", "id"];
+
+        // Ajouter une carte centrée sur Londres
+        dashboard.addMap('Carte 1: Londres', [51.5074, -0.1278]);
+
+        // Ajouter des marqueurs sur la carte de Londres avec les données utilisateur
+        dashboard.mapManager.addUserMarkers("map-0", userLocations, propertyKeys);
+
+        // Ajouter un graphique linéaire
+        dashboard.addChart('line', {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+            datasets: [{
+                label: 'Ventes',
+                data: [10, 20, 30, 40, 50]
+            }]
+        }, { 
+            title: 'Graphique Linéaire',
+            
+        });
+
+        // Ajouter un graphique à barres
+        dashboard.addChart('bar', {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+            datasets: [{
+                label: 'Revenus',
+                data: [15, 25, 35, 45, 55]
+            }]
+        }, { 
+            title: 'Graphique à Barres', 
+            
+        });
+
+        // Ajouter une carte pour Paris avec des marqueurs
+        const dashboard2 = new AdvancedDashboard('dashboard-container');
+        dashboard2.addMap('Carte 2: Paris', [48.8566, 2.3522]);
+        dashboard2.mapManager.addUserMarkers("map-1", userLocations, propertyKeys);
+
+        // Ajouter une autre carte pour New York
+        const dashboard3 = new AdvancedDashboard('dashboard-container');
+        dashboard3.addMap('Carte 3: New York', [40.7128, -74.0060]);
+        dashboard3.mapManager.addUserMarkers("map-2", userLocations, propertyKeys);
+        
+        // Ajouter des graphiques supplémentaires pour tester les fonctionnalités
+        dashboard3.addChart('pie', {
+            labels: ['Rouge', 'Bleu', 'Vert'],
+            datasets: [{
+                data: [300, 50, 100]
+            }]
+        }, { 
+            title: 'Graphique à Secteurs', 
+            
+        });
+    </script>
+
+</body>
+</html>

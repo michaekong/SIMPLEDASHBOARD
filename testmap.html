@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de Dashboard Avancé</title>
+    <!-- Inclusion de la feuille de style pour Leaflet (la bibliothèque de cartes) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
+    
+    <style>
+        /* Style de base pour le corps de la page */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Conteneur du dashboard */
+        #dashboard-container {
+            width: 100%;
+            height: 100vh; /* Utilisation de toute la hauteur de la fenêtre */
+        }
+    </style>
+
+    <!-- Style pour Leaflet Draw, utilisé pour dessiner sur la carte -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+</head>
+<body>
+
+    <!-- Conteneur du Dashboard pour afficher les cartes -->
+    <div id="dashboard-container"></div>
+
+    <!-- Chargement des bibliothèques nécessaires -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Pour les graphiques, si nécessaire -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script> <!-- Bibliothèque Leaflet -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script> <!-- Extension Leaflet Draw -->
+    
+    <!-- Inclusion du fichier JS contenant la classe AdvancedDashboard -->
+    <script src="class.js"></script> <!-- Assurez-vous d'inclure le fichier class.js ici -->
+    
+    <script>
+        // Exemple de données pour plusieurs utilisateurs avec des coordonnées et propriétés supplémentaires
+        // IMPORTANT LES OBJETS DOIVENT TOUJOURS AVOIR UN IDENTIFIANT UNIQUE NOMMEE "id"
+        // IMPORTANT LES OBJETS DOIVENT TOUJOURS AVOIR UN IDENTIFIANT UNIQUE NOMMEE "id"
+        // IMPORTANT LES OBJETS DOIVENT TOUJOURS AVOIR UN IDENTIFIANT UNIQUE NOMMEE "id"
+        // IMPORTANT LES OBJETS DOIVENT TOUJOURS AVOIR UN IDENTIFIANT UNIQUE NOMMEE "id"
+        const userLocations = [
+            { latitude: 40.7128, longitude: -74.0060, name: "John Doe", age: 28, occupation: "Developer", id: "1" },
+            { latitude: 34.0522, longitude: -118.2437, name: "Jane Smith", age: 34, occupation: "Designer", id: "2" },
+            { latitude: 51.5074, longitude: -0.1278, name: "Albert", age: 45, occupation: "Manager", id: "3" },
+            { latitude: 48.8566, longitude: 2.3522, name: "Pierre Dupont", age: 29, occupation: "Architect", id: "4" },
+            { latitude: 40.7306, longitude: -73.9352, name: "Alice Johnson", age: 33, occupation: "Engineer", id: "5" },
+            { latitude: 37.7749, longitude: -122.4194, name: "Bob Lee", age: 40, occupation: "Writer", id: "6" },
+            { latitude: 52.5200, longitude: 13.4050, name: "Maria Schmidt", age: 31, occupation: "Artist", id: "7" },
+            { latitude: 41.9028, longitude: 12.4964, name: "Luigi Rossi", age: 27, occupation: "Photographer", id: "8" }
+        ];
+
+        // Liste des propriétés à afficher dans les infobulles des marqueurs
+        const propertyKeys = ["name", "age", "occupation", "id"]; // Affichage des propriétés "name", "age", "occupation" et "id" dans les infobulles
+
+        // Créez une instance du Dashboard Avancé
+        const dashboard = new AdvancedDashboard('dashboard-container');
+
+        // Ajouter la première carte centrée sur Londres
+        dashboard.addMap('Carte 1: Londres', [51.5074, -0.1278]);
+
+        // Ajouter des marqueurs sur la carte avec les données d'utilisateur
+        dashboard.mapManager.addUserMarkers("map-0", userLocations, propertyKeys);
+
+        // Ajouter une deuxième carte centrée sur Paris
+        const dashboard2 = new AdvancedDashboard('dashboard-container');
+        dashboard2.addMap('Carte 2: Paris', [48.8566, 2.3522]);
+
+        // Ajouter des marqueurs pour la deuxième carte
+        dashboard2.mapManager.addUserMarkers("map-1", userLocations, propertyKeys);
+
+        // Ajouter une troisième carte centrée sur New York
+        const dashboard3 = new AdvancedDashboard('dashboard-container');
+        dashboard3.addMap('Carte 3: New York', [40.7128, -74.0060]);
+
+        // Ajouter des marqueurs pour la troisième carte
+        dashboard3.mapManager.addUserMarkers("map-2", userLocations, propertyKeys);
+
+        // Ajouter une quatrième carte centrée sur Berlin
+        const dashboard4 = new AdvancedDashboard('dashboard-container');
+        dashboard4.addMap('Carte 4: Berlin', [52.5200, 13.4050]);
+
+        // Ajouter des marqueurs pour la quatrième carte
+        dashboard4.mapManager.addUserMarkers("map-3", userLocations, propertyKeys);
+
+        // Ajouter une cinquième carte centrée sur Rome
+        const dashboard5 = new AdvancedDashboard('dashboard-container');
+        dashboard5.addMap('Carte 5: Rome', [41.9028, 12.4964]);
+
+        // Ajouter des marqueurs pour la cinquième carte
+        dashboard5.mapManager.addUserMarkers("map-4", userLocations, propertyKeys);
+        const dashboardZ= new AdvancedDashboard('dashboardContainer');
+dashboardZ.SimpleChartManager.addChart('line', data, {
+    title: 'My Custom Chart',
+    colorScheme: 'warm', // ou spécifiez une palette personnalisée avec 'colors'
+    colors: ['#FF5733', '#33FF57', '#3357FF'] // palette spécifique pour ce graphique
+});
+        
+        // Vous pouvez répéter cette logique pour ajouter encore plus de cartes avec les données nécessaires
+
+    </script>
+
+</body>
+</html>

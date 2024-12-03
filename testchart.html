@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test du Tableau de Bord Avancé</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+        }
+        #dashboardContainer {
+            width: 100%;
+            height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div id="dashboardContainer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="class.js"></script> <!-- Importation du fichier contenant votre classe JavaScript -->
+
+    <script>
+        // Initialisation du tableau de bord et ajout des graphiques
+        const dashboard = new AdvancedDashboard('dashboardContainer');
+
+        // Exemple de graphique linéaire
+        dashboard.addChart('line', {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+            datasets: [{
+                label: 'Ventes',
+                data: [10, 20, 30, 40, 50]
+            }]
+        }, { 
+            title: 'Graphique Linéaire',
+             // Couleurs spécifiées
+        });
+
+        // Exemple de graphique à barres
+        dashboard.addChart('bar', {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+            datasets: [{
+                label: 'Revenus',
+                data: [15, 25, 35, 45, 55]
+            }]
+        }, { 
+            title: 'Graphique à Barres', 
+             // Couleurs spécifiées
+        });
+
+        // Exemple de graphique à secteurs
+        dashboard.addChart('pie', {
+            labels: ['Rouge', 'Bleu', 'Vert'],
+            datasets: [{
+                data: [300, 50, 100]
+            }]
+        }, { 
+            title: 'Graphique à Secteurs', 
+             // Couleurs spécifiées
+        });
+
+        // Exemple de graphique radar
+        dashboard.addChart('radar', {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+            datasets: [{
+                label: 'Performance',
+                data: [80, 70, 90, 60, 85]
+            }]
+        }, { 
+            title: 'Graphique Radar',
+             // Couleurs spécifiées
+        });
+
+        // Exemple de graphique polar area
+        dashboard.addChart('polarArea', {
+            labels: ['A', 'B', 'C', 'D', 'E'],
+            datasets: [{
+                data: [40, 60, 80, 90, 55]
+            }]
+        }, { 
+            title: 'Graphique Polar Area',
+             // Couleurs spécifiées
+        });
+
+        // Exemple de graphique doughnut
+        dashboard.addChart('doughnut', {
+            labels: ['Option A', 'Option B', 'Option C'],
+            datasets: [{
+                data: [25, 35, 40]
+            }]
+        }, { 
+            title: 'Graphique Doughnut',
+             // Couleurs spécifiées
+        });
+
+        // Exemple de graphique nuage de points (scatter)
+        dashboard.addChart('scatter', {
+            datasets: [{
+                label: 'Nuage de Points',
+                data: [
+                    { x: 1, y: 10 },
+                    { x: 2, y: 20 },
+                    { x: 3, y: 30 },
+                    { x: 4, y: 40 },
+                    { x: 5, y: 50 }
+                ]
+            }]
+        }, { 
+            title: 'Graphique Nuage de Points',
+             // Couleurs spécifiées
+        });
+
+    </script>
+</body>
+</html>

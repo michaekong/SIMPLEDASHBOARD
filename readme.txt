@@ -1,10 +1,4 @@
-\begin{frame}{Soft Skills}
-    \begin{itemize}
-        \item Collaboration interdisciplinaire
-        \item Gestion de projet agile
-        \item Présentation des résultats techniques
-    \end{itemize}
-\end{frame}
+
 Documentation de la Classe AdvancedDashboard
 Description
 

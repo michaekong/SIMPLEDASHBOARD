@@ -1,130 +1,156 @@
-Voici une documentation complète des classes AdvancedDashboard, SimpleChartManager, et SimpleMapManager, expliquant chaque méthode et leur fonction.
-Classe AdvancedDashboard
-1. Constructeur constructor(containerId)
+\begin{frame}{Soft Skills}
+    \begin{itemize}
+        \item Collaboration interdisciplinaire
+        \item Gestion de projet agile
+        \item Présentation des résultats techniques
+    \end{itemize}
+\end{frame}
+Documentation de la Classe AdvancedDashboard
+Description
 
-    Paramètre: containerId : l'ID du conteneur dans lequel le tableau de bord sera inséré.
-    Description: Le constructeur initialise un tableau de bord flexible avec une grille dynamique et crée des gestionnaires pour les graphiques et les cartes.
-    Actions:
-        Crée un conteneur de grille.
-        Initialise deux sous-gestionnaires: SimpleChartManager et SimpleMapManager.
+La classe AdvancedDashboard crée un tableau de bord flexible qui peut contenir des graphiques et des cartes. Elle gère la création d'un conteneur de grille pour les éléments du tableau de bord et initialise les gestionnaires de graphiques et de cartes.
+Constructeur
+javascript
 
-2. Méthode _createGridContainer()
+constructor(containerId)
 
-    Description: Crée un conteneur div pour la grille flexible où les graphiques et cartes seront ajoutés. Utilise le modèle de grille CSS pour une disposition fluide et réactive.
-    Retourne: L'élément gridContainer.
+Paramètres
 
-3. Méthode addChart(type, data, options = {})
+    containerId (string) : L'ID du conteneur HTML dans lequel le tableau de bord sera inséré.
 
-    Paramètres:
-        type : Le type de graphique à créer (par exemple bar, line, pie).
-        data : Les données à afficher sur le graphique (labels et datasets).
-        options : Options supplémentaires comme le titre, les couleurs, etc.
-    Description: Appelle le gestionnaire de graphiques (SimpleChartManager) pour ajouter un graphique avec le type, les données et les options spécifiés.
-    Retourne: L'ID du graphique créé.
+Méthodes
 
-4. Méthode addMap(title, center, options = {})
+    _createGridContainer()
+        Crée un conteneur de grille flexible pour le tableau de bord.
 
-    Paramètres:
-        title : Le titre de la carte.
-        center : La position initiale de la carte (lat, lng).
-        options : Options supplémentaires pour la carte (niveau de zoom, taille de la carte, etc.).
-    Description: Appelle le gestionnaire de cartes (SimpleMapManager) pour ajouter une carte avec un titre et une position centrale.
-    Retourne: Aucun (fonction de procédure).
+    addChart(type, data, options = {})
+        Ajoute un graphique au tableau de bord.
+        Paramètres :
+            type (string) : Type de graphique à créer (ex. 'bar', 'line', 'pie', etc.).
+            data (object) : Les données à afficher dans le graphique.
+            options (object, optionnel) : Options supplémentaires pour configurer le graphique (ex. titre, couleurs).
 
-Classe SimpleChartManager
-1. Constructeur constructor(gridContainer)
+    addMap(title, center, options = {})
+        Ajoute une carte au tableau de bord.
+        Paramètres :
+            title (string) : Titre de la carte.
+            center (array) : Coordonnées pour centrer la carte (ex. [latitude, longitude]).
+            options (object, optionnel) : Options supplémentaires pour configurer la carte.
 
-    Paramètre: gridContainer : Le conteneur de grille où les graphiques seront affichés.
-    Description: Initialise le gestionnaire de graphiques, y compris les paramètres par défaut et les schémas de couleurs.
+Documentation de la Classe SimpleChartManager
+Description
 
-2. Méthode _loadChartJS()
+La classe SimpleChartManager gère la création et l'affichage de graphiques à l'aide de Chart.js. Elle gère les styles, les schémas de couleurs et la création dynamique de graphiques.
+Constructeur
+javascript
 
-    Description: Charge dynamiquement la bibliothèque Chart.js si elle n'est pas déjà présente dans le document.
-    Retourne: Une promesse qui est résolue une fois que la bibliothèque est chargée.
+constructor(gridContainer)
 
-3. Méthode _createChartContainer(id, title)
+Paramètres
 
-    Paramètres:
-        id : L'ID unique du graphique.
-        title : Le titre à afficher pour le graphique.
-    Description: Crée un conteneur div pour un graphique avec un titre et un élément <canvas> pour l'affichage du graphique.
-    Retourne: L'élément <canvas>.
+    gridContainer (HTMLElement) : Le conteneur de grille dans lequel les graphiques seront ajoutés.
 
-4. Méthode _getColorScheme(schemeName, count)
+Méthodes
 
-    Paramètres:
-        schemeName : Le nom du schéma de couleurs à utiliser (par exemple, "default").
-        count : Le nombre de couleurs nécessaires pour le graphique.
-    Description: Retourne une liste de couleurs correspondant au schéma spécifié et au nombre de couleurs demandées.
-    Retourne: Un tableau de couleurs.
+    _loadChartJS()
+        Charge de manière asynchrone la bibliothèque Chart.js.
 
-5. Méthode addChart(type, data, options = {})
+    _createChartContainer(id, title)
+        Crée un conteneur pour un graphique.
+        Paramètres :
+            id (string) : L'ID du canvas du graphique.
+            title (string, optionnel) : Le titre du graphique.
 
-    Paramètres:
-        type : Le type de graphique (par exemple, "line", "bar").
-        data : Les données à afficher.
-        options : Options supplémentaires comme le titre, les couleurs, etc.
-    Description: Crée un graphique en utilisant les données et options fournies. Utilise Chart.js pour afficher le graphique.
-    Retourne: L'ID du graphique créé.
+    _getColorScheme(schemeName, count)
+        Obtient un schéma de couleurs spécifique pour les graphiques.
+        Paramètres :
+            schemeName (array) : Un tableau de couleurs spécifiées.
+            count (number) : Le nombre de couleurs nécessaires.
 
-6. Méthode addCustomColorScheme(name, colors)
+    addChart(type, data, options = {})
+        Ajoute un graphique au gestionnaire de graphiques.
+        Paramètres :
+            type (string) : Le type de graphique à créer.
+            data (object) : Les données à afficher dans le graphique.
+            options (object, optionnel) : Options supplémentaires pour configurer le graphique.
 
-    Paramètres:
-        name : Le nom du schéma de couleurs à ajouter.
-        colors : Un tableau de couleurs à utiliser pour ce schéma.
-    Description: Permet d'ajouter un schéma de couleurs personnalisé à la collection de schémas disponibles.
-    Retourne: Aucun.
+    addCustomColorScheme(name, colors)
+        Ajoute un schéma de couleurs personnalisé.
+        Paramètres :
+            name (string) : Le nom du schéma de couleurs.
+            colors (array) : Un tableau de couleurs.
 
-Classe SimpleMapManager
-1. Constructeur constructor(gridContainer)
+Documentation de la Classe SimpleMapManager
+Description
 
-    Paramètre: gridContainer : Le conteneur de la grille où les cartes seront insérées.
-    Description: Initialise le gestionnaire de cartes avec des options par défaut, telles que le zoom, la hauteur de la carte, etc. Charge les ressources nécessaires pour Leaflet.
+La classe SimpleMapManager est responsable de la gestion des cartes dans un tableau de bord. Elle permet d'ajouter des cartes, de gérer des couches de dessin, de personnaliser l'apparence des éléments sur la carte, et d'interagir avec des marqueurs et des polygones.
+Propriétés
 
-2. Méthode loadLeaflet()
+    static mapCounter : Compteur statique pour générer des identifiants uniques pour chaque carte créée.
+    gridContainer : Conteneur HTML où les cartes seront ajoutées.
+    defaultOptions : Options par défaut pour les cartes (zoom, hauteur, couleur de dessin, cartes de base).
+    maps : Map qui stocke les instances de cartes créées.
+    currentDrawColor : Couleur actuellement utilisée pour le dessin sur la carte.
 
-    Description: Charge les ressources nécessaires pour Leaflet (bibliothèque de cartes) et Leaflet.Draw (pour dessiner sur la carte).
-    Retourne: Une promesse qui est résolue une fois les ressources chargées.
+Constructeur
+javascript
 
-3. Méthode _createSection(title)
+constructor(gridContainer)
 
-    Paramètre: title : Le titre à afficher pour la section de la carte.
-    Description: Crée une section dans la grille pour afficher la carte, avec un titre optionnel.
-    Retourne: L'élément de la section créée.
+Paramètres
 
-4. Méthode _addColorPicker(container)
+    gridContainer (Element) : Le conteneur HTML dans lequel les cartes seront ajoutées.
 
-    Paramètre: container : Le conteneur où le sélecteur de couleur sera ajouté.
-    Description: Ajoute un sélecteur de couleur à la section pour que l'utilisateur puisse choisir la couleur des éléments dessinés sur la carte.
-    Retourne: Aucun.
+Méthodes
 
-5. Méthode calculateProperties(layer)
+    loadLeaflet()
+        Charge les fichiers CSS et JS nécessaires pour utiliser Leaflet et ses plugins (comme Leaflet.Draw).
+        Retourne : Une promesse qui est résolue lorsque Leaflet a été chargé.
 
-    Paramètre: layer : La couche de carte à analyser (polygone, ligne, etc.).
-    Description: Calcule des propriétés pour une couche donnée, telles que l'aire (pour un polygone) ou la longueur (pour une ligne).
-    Retourne: Un objet contenant les propriétés calculées (par exemple, aire, périmètre, longueur).
+    _createSection(title)
+        Crée une section dans le conteneur de la grille avec un titre optionnel.
+        Paramètres :
+            title (string, optionnel) : Titre de la section à créer.
+        Retourne : L'élément de section créé.
 
-6. Méthode addMap(title, center, options = {})
+    _addColorPicker(container)
+        Ajoute un sélecteur de couleur dans le conteneur spécifié pour permettre à l'utilisateur de choisir une couleur pour les éléments dessinés sur la carte.
+        Paramètres :
+            container (Element) : Le conteneur dans lequel le sélecteur de couleur sera ajouté.
 
-    Paramètres:
-        title : Le titre de la carte.
-        center : La position centrale initiale de la carte.
-        options : Options supplémentaires pour la carte (zoom, taille de la carte, etc.).
-    Description: Crée et initialise une carte Leaflet avec les options et le titre fournis, ajoute un sélecteur de couleur, et permet de dessiner des éléments sur la carte.
-    Retourne: Aucun (fonction de procédure).
+    calculateProperties(layer)
+        Calcule les propriétés (aire, périmètre, longueur) d'une couche donnée (polygone, rectangle, polyline).
+        Paramètres :
+            layer (L.Layer) : La couche à évaluer.
+        Retourne : Un objet contenant les propriétés calculées.
 
-7. Méthode _getMarkersInsidePolygon(polygon)
+    addMap(title, center, options = {})
+        Ajoute une nouvelle carte au tableau de bord.
+        Paramètres :
+            title (string) : Titre de la carte.
+            center (array) : Coordonnées pour centrer la carte (ex. [latitude, longitude]).
+            options (object, optionnel) : Options supplémentaires pour configurer la carte (zoom, hauteur, etc.).
 
-    Paramètre: polygon : Le polygone sur lequel on souhaite vérifier la présence de marqueurs.
-    Description: Retourne une liste de marqueurs qui se trouvent à l'intérieur du polygone spécifié.
-    Retourne: Un tableau d'objets contenant les marqueurs à l'intérieur du polygone.
+    _getMarkersInsidePolygon(polygon)
+        Récupère tous les marqueurs situés à l'intérieur d'un polygone donné.
+        Paramètres :
+            polygon (L.Polygon) : Le polygone dans lequel vérifier la présence de marqueurs.
+        Retourne : Un tableau d'objets contenant les marqueurs trouvés à l'intérieur du polygone.
 
-Explication des autres lignes et fonctionnalités importantes :
+    addUserMarkers(mapId, userLocations, propertyKeys)
+        Ajoute des marqueurs représentant des utilisateurs sur une carte spécifiée.
+        Paramètres :
+            mapId (string) : L'ID de la carte à laquelle les marqueurs doivent être ajoutés.
+            userLocations (array) : Un tableau d'objets contenant les coordonnées et les propriétés des utilisateurs.
+            propertyKeys (array) : Un tableau de clés pour extraire les propriétés des utilisateurs à afficher dans les infobulles des marqueurs.
 
-    Chargement dynamique des ressources : Les bibliothèques externes comme Chart.js et Leaflet sont chargées de manière asynchrone pour garantir que la page ne se bloque pas pendant le chargement.
+Exemple d'Utilisation
+javascript
 
-    Interaction avec Leaflet Draw : Les cartes créées permettent à l'utilisateur de dessiner des éléments (polygones, lignes, marqueurs) directement sur la carte, avec des options pour changer la couleur des éléments dessinés.
+const mapManager = new SimpleMapManager(document.getElementById('mapContainer'));
+mapManager.addMap('Ma Carte', [48.8566, 2.3522]); // Ajoute une carte centrée sur Paris.
 
-    Calculs géométriques : La méthode calculateProperties permet de calculer des informations géométriques sur les objets dessinés (comme les polygones ou les lignes), offrant ainsi une manière d'afficher des données supplémentaires en fonction de l'interaction avec la carte.
+Remarques
 
-Cette documentation détaillée couvre le fonctionnement de chaque méthode de chaque classe. Vous pouvez utiliser ces informations pour personnaliser davantage votre tableau de bord ou pour comprendre comment intégrer ces classes dans un projet plus vaste.
+    Assurez-vous que l'environnement prend en charge Leaflet et que les ressources sont bien chargées avant d'utiliser cette classe.
+    Les couleurs des éléments dessinés sur la carte peuvent être personnalisées à l'aide du sélecteur de couleur intégré.
